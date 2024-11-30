@@ -6,6 +6,7 @@ import { taskOptions } from "../lib/tasks";
 
 export default function Introduction({ onSubmit }) {
   const [selectedTasks, setSelectedTasks] = useState([]);
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleTaskToggle = (taskId) => {
     setSelectedTasks(current =>
@@ -19,6 +20,7 @@ export default function Introduction({ onSubmit }) {
     const selectedDescriptions = taskOptions
       .filter(task => selectedTasks.includes(task.id))
       .map(task => task.description);
+    setShowConfirmation(true);
     onSubmit(selectedDescriptions);
   };
 
@@ -46,16 +48,22 @@ export default function Introduction({ onSubmit }) {
         ))}
       </div>
 
-      <div className="flex justify-center mt-6">
+      <div className="flex flex-col items-center mt-6 space-y-4">
         <Button
           onClick={handleSubmit}
           disabled={selectedTasks.length === 0}
-          className="px-8 bg-emerald-500 hover:bg-emerald-600 dark:bg-emerald-600 dark:hover:bg-emerald-700"
+          className={`px-8 bg-emerald-500 hover:bg-emerald-600 dark:bg-emerald-600 dark:hover:bg-emerald-700 ${
+            selectedTasks.length === 0 ? 'opacity-50 cursor-not-allowed' : ''
+          }`}
         >
           Let's Go
         </Button>
+        {showConfirmation && (
+          <p className="text-lg text-emerald-500 mt-4 animate-fade-in">
+            You are all set to go, let's start chatting
+          </p>
+        )}
       </div>
     </div>
   );
 }
-
