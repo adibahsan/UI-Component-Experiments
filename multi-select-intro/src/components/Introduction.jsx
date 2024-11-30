@@ -3,6 +3,7 @@ import { Button } from "./Button";
 import { BotIcon } from "./BotIcon";
 import { SelectableCard } from "./SelectableCard";
 import { taskOptions } from "../lib/tasks";
+import { ArrowRight } from "lucide-react";
 
 export default function Introduction({ onSubmit }) {
   const [selectedTasks, setSelectedTasks] = useState([]);
@@ -77,7 +78,7 @@ export default function Introduction({ onSubmit }) {
               selectedTasks.length === 0 ? 'opacity-50 cursor-not-allowed' : ''
             }`}
           >
-            Let's Go
+            Let's Go <ArrowRight className="inline-block ml-2 h-5 w-5" />
           </Button>
         </div>
       </div>
